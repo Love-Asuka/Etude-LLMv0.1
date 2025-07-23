@@ -96,8 +96,8 @@ python inference.py
 
 ## 推荐训练集
 
--语义学习:https://www.modelscope.cn/datasets/modelscope/SkyPile-150B
--对话微调（文件名称带有sft）：https://www.modelscope.cn/datasets/gongjy/minimind_dataset/files
+- 语义学习:https://www.modelscope.cn/datasets/modelscope/SkyPile-150B
+- 对话微调（文件名称带有sft）：https://www.modelscope.cn/datasets/gongjy/minimind_dataset/files
 
 ## 未来工作
 
