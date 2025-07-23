@@ -94,6 +94,11 @@ python inference.py
 - **n_embd**: 嵌入维度 (768)
 - **vocab_size**: 词表大小 (50257)
 
+## 推荐训练集
+
+-语义学习:https://www.modelscope.cn/datasets/modelscope/SkyPile-150B
+-对话微调（文件名称带有sft）：https://www.modelscope.cn/datasets/gongjy/minimind_dataset/files
+
 ## 未来工作
 
 - 将在v0.2引入Mixture of Experts (MoE)机制，提高模型容量和推理效率
