@@ -15,7 +15,7 @@ class SFTDataset(Dataset):
         self.bos_token = self.enc.encode("<|startoftext|>", allowed_special={"<|startoftext|>"})[0]
         self.sep_token = self.enc.encode("\n", allowed_special={"\n"})[0] 
         self.encoded_data = []
-        self.max_lines = 500
+        self.max_lines = 500 #每个文件读取的最大行数
         raw_conversations = []
         
         with open(path, 'r', encoding='utf-8') as f:
@@ -124,11 +124,11 @@ def main2():
     # 多文件处理逻辑（与原文件一致）
     folder_path = "jsonl_sft"  # SFT对话数据目录
     jsonl_files = [f for f in os.listdir(folder_path) if f.endswith('.jsonl')]
-    num_jsonls_to_train = 200  # 指定训练的JSONL文件数量
+    num_jsonls_to_train = 500  # 指定训练的JSONL文件数量
     epochs_per_file = 1  # 每个JSONL文件训练的轮数
     total_epochs = num_jsonls_to_train * epochs_per_file  
     
-    save_interval = 100  # 保存间隔
+    save_interval = 50  # 保存间隔
 
     for epoch in range(start_epoch, total_epochs):
         file_idx = (epoch // epochs_per_file) % num_jsonls_to_train

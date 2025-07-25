@@ -154,7 +154,7 @@ class MyDataset(Dataset):
         self.block_size = block_size
         self.eos_token = self.enc.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})[0]
         self.encoded_data = []
-        self.max_lines = 500
+        self.max_lines = 5000 #每个文件读取的最大行数，因为我的想法是流式读取，所以不知道整个文件的句子数量，所以设定一个最大值，单个文件句子数设定在我项目的切割工具里可以设定
         raw_data = []
         with open(path, 'r', encoding='utf-8') as f: 
             for i, line in enumerate(f):
