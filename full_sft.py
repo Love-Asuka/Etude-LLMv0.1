@@ -5,7 +5,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import tiktoken
-from model_train import Etude, GPTConfig  # 从你的模型文件中导入
+from model_train import Etude, GPTConfig  
 
 class SFTDataset(Dataset):
     def __init__(self, path, block_size=512):
@@ -13,7 +13,7 @@ class SFTDataset(Dataset):
         self.block_size = block_size
         self.eos_token = self.enc.encode("<|endoftext|>", allowed_special={"<|endoftext|>"})[0]
         self.bos_token = self.enc.encode("<|startoftext|>", allowed_special={"<|startoftext|>"})[0]
-        self.sep_token = self.enc.encode("\n", allowed_special={"\n"})[0]  # 添加分隔符
+        self.sep_token = self.enc.encode("\n", allowed_special={"\n"})[0] 
         self.encoded_data = []
         self.max_lines = 500
         raw_conversations = []
