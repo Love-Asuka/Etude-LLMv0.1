@@ -233,7 +233,7 @@ def main1():
     folder_path = "json"  # 路径
     jsonl_files = [f for f in os.listdir(folder_path) if f.endswith('.jsonl')]
     num_jsonls_to_train = 500  # 文件数量
-    epochs_per_file = 1  #轮数
+    epochs_per_file = 2  #轮数
     total_epochs = num_jsonls_to_train * epochs_per_file 
 
     start_epoch = 0

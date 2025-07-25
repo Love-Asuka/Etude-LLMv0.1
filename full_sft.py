@@ -15,7 +15,7 @@ class SFTDataset(Dataset):
         self.bos_token = self.enc.encode("<|startoftext|>", allowed_special={"<|startoftext|>"})[0]
         self.sep_token = self.enc.encode("\n", allowed_special={"\n"})[0] 
         self.encoded_data = []
-        self.max_lines = 500 #每个文件读取的最大行数
+        self.max_lines = 20000 #每个文件读取的最大行数
         raw_conversations = []
         
         with open(path, 'r', encoding='utf-8') as f:
