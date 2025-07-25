@@ -103,10 +103,10 @@ def main2():
     
 
     model = Etude(config).to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=3e-5)  # SFT使用更小的学习率
+    optimizer = torch.optim.AdamW(model.parameters(), lr=3e-3)  
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=1000)
     
-    # 打印参数量（与原文件一致）
+
     total_params = sum(p.numel() for p in model.parameters())
     print(f"总参数量: {total_params / 1e6:.2f} M")
 
@@ -124,9 +124,9 @@ def main2():
     # 多文件处理逻辑（与原文件一致）
     folder_path = "jsonl_sft"  # SFT对话数据目录
     jsonl_files = [f for f in os.listdir(folder_path) if f.endswith('.jsonl')]
-    num_jsonls_to_train = 500  # 指定训练的JSONL文件数量
+    num_jsonls_to_train = 200  # 指定训练的JSONL文件数量
     epochs_per_file = 1  # 每个JSONL文件训练的轮数
-    total_epochs = num_jsonls_to_train * epochs_per_file  # 总训练轮数
+    total_epochs = num_jsonls_to_train * epochs_per_file  
     
     save_interval = 100  # 保存间隔
 

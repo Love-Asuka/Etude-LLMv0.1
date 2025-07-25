@@ -225,7 +225,7 @@ def main1():
     model = Etude(config)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = model.to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=3e-3)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=1000)
     total_params = sum(p.numel() for p in model.parameters())
     print(f"总参数量: {total_params / 1e6:.2f} M")
