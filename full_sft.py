@@ -32,22 +32,21 @@ class SFTDataset(Dataset):
                 except Exception as e:
                     continue
         
-        # 处理对话数据
+
         for conv in raw_conversations:
-            # 为每个对话构建完整的token序列
+
             full_encoded = [self.bos_token]
             for turn in conv:
                 role = turn.get("role", "")
                 content = turn.get("content", "")
                 if role and content:
-                    # 编码角色和内容
+
                     role_encoded = self.enc.encode(role + ": ")
                     content_encoded = self.enc.encode(content)
                     full_encoded.extend(role_encoded + content_encoded + [self.sep_token])
             
             full_encoded.append(self.eos_token)
-            
-            # 分块处理
+
             for i in range(0, len(full_encoded), self.block_size):
                 chunk = full_encoded[i:i+self.block_size+1]
                 if len(chunk) < self.block_size + 1:
@@ -71,10 +70,10 @@ def train_sft(model, optimizer, scheduler, train_loader, val_loader, device, epo
     for batch_idx, (x, y) in enumerate(pbar):
         x, y = x.to(device), y.to(device)
         
-        # 前向传播
+
         logits, loss = model(x, targets=y)
         
-        # 反向传播
+
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -98,11 +97,11 @@ def evaluate_sft(model, val_loader, device):
     return val_loss / len(val_loader)
 
 def main2():
-    # 配置参数（与原文件一致）
+
     config = GPTConfig()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
-    # 初始化模型
+
     model = Etude(config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=3e-5)  # SFT使用更小的学习率
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=1000)
@@ -135,18 +134,18 @@ def main2():
         file_idx = (epoch // epochs_per_file) % num_jsonls_to_train
         file_path = os.path.join(folder_path, jsonl_files[file_idx % len(jsonl_files)])
         
-        # 数据集加载（与原文件一致）
+
         train_dataset = SFTDataset(file_path)
         train_dataset, val_dataset = torch.utils.data.random_split(train_dataset, [0.9, 0.1])
         train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True)
         val_loader = DataLoader(val_dataset, batch_size=config.batch_size, shuffle=False)
 
-        # 训练和验证
+
         train_loss = train_sft(model, optimizer, scheduler, train_loader, val_loader, device, epoch, total_epochs)
         val_loss = evaluate_sft(model, val_loader, device)
         print(f'轮次: {epoch+1}, 训练损失: {train_loss:.4f}, 验证损失: {val_loss:.4f}')
 
-        # 检查点保存逻辑（与原文件一致）
+
         checkpoint = {
             'epoch': epoch,
             'model_state_dict': model.state_dict(),
