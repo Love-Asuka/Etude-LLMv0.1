@@ -93,11 +93,11 @@ python inference.py
 
 模型的主要配置参数在`GPTConfig`类中定义：
 
-- **block_size**: 文本的最大长度 (512)
-- **batch_size**: 批处理大小 (8)
-- **n_layer**: Transformer层数 (6)
-- **n_head**: 注意力头数 (12)
-- **n_embd**: 嵌入维度 (768)
+- **block_size**: 文本的最大长度 (2048)
+- **batch_size**: 批处理大小 (2)
+- **n_layer**: Transformer层数 (8)
+- **n_head**: 注意力头数 (8)
+- **n_embd**: 嵌入维度 (512)
 - **vocab_size**: 词表大小 (50257)
 
 ## 未来工作
@@ -125,3 +125,4 @@ python inference.py
 
 感谢所有开源语言模型社区的贡献，本项目从中获得了许多灵感和参考。
 因为我个人水平和精力原因，部分代码会使用开源项目中的代码，代码写的烂见谅。
+
