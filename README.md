@@ -17,16 +17,22 @@ Etude LLM是一个基于Transformer架构的轻量级语言模型项目，旨在
 
 ```
 Etude LLM/
-├── UI/                   # 用户界面相关文件
-├── big_json/             # 大型训练数据集
-├── full_sft.py           # 监督微调实现
-├── inference.py          # 模型推理接口
-├── json/                 # 基础训练数据
-├── jsonl_sft/            # 监督微调数据
-├── model_train.py        # 模型架构和基础训练实现
-├── tool/                 # 工具脚本
+├── UI/                   # 用户界面相关预留文件
+├── big_json/             # 大型训练数据集存储目录
+├── full_sft.py           # 监督微调（SFT）实现脚本
+├── inference.py          # 模型推理与对话接口
+├── json/                 # 基础预训练数据集目录
+├── jsonl_sft/            # 监督微调数据集目录
+├── model_train.py        # 模型架构与基础训练实现
+├── tool/                 # 数据处理工具脚本
+│   ├── cut_txt.py        # 大文件分割工具
+│   ├── extract_xml.py    # XML数据提取与清洗工具
+│   ├── cut_json.py       # JSON数据分割工具
+│   └── cut_jsonl_sft.py  # SFT对话数据分割工具
 ├── weight/               # 模型权重保存目录
-└── 一键炼丹模式.py        # 快速训练启动脚本
+│   ├── weight_train/     # 预训练权重
+│   └── weight_sft/       # 微调权重
+└── 一键炼丹模式.py        # 快速启动训练与微调的脚本
 ```
 
 ## 核心组件
@@ -94,11 +100,6 @@ python inference.py
 - **n_embd**: 嵌入维度 (768)
 - **vocab_size**: 词表大小 (50257)
 
-## 推荐训练集
-
-- 语义学习:https://www.modelscope.cn/datasets/modelscope/SkyPile-150B
-- 对话微调（文件名称带有sft）：https://www.modelscope.cn/datasets/gongjy/minimind_dataset/files
-
 ## 未来工作
 
 - 将在v0.2引入Mixture of Experts (MoE)机制，提高模型容量和推理效率
@@ -123,4 +124,4 @@ python inference.py
 ## 致谢
 
 感谢所有开源语言模型社区的贡献，本项目从中获得了许多灵感和参考。
-因为我个人水平和精力原因，部分代码会使用开源项目中的代码，部分情况会使用AI，代码写的烂见谅。
+因为我个人水平和精力原因，部分代码会使用开源项目中的代码，代码写的烂见谅。

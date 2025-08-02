@@ -1,7 +1,8 @@
 import torch
 import json
 import os
-from model_train import Etude, GPTConfig
+from model import Etude
+from train import GPTConfig
 import tiktoken
 import random
 
@@ -14,7 +15,7 @@ device = "cuda"
 model = model.to(device)
 
 
-checkpoint_path = "weight\sft_model_latest.pt"
+checkpoint_path = "weight\weight_train\model_epoch_latest.pt"
 if os.path.exists(checkpoint_path):
     checkpoint = torch.load(checkpoint_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
