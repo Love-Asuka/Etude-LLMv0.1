@@ -119,7 +119,7 @@ def main2():
     config = GPTConfig()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
-    # 初始化模型
+    
     model = Etude(config).to(device)
     
     # 优化器和学习率调度器
@@ -137,7 +137,7 @@ def main2():
         training_steps=total_train_steps
     )
     
-    # 打印模型信息
+    
     total_params = sum(p.numel() for p in model.parameters())
     print(f"总参数量: {total_params / 1e6:.2f} M")
     print(f"使用设备: {device}")
@@ -179,13 +179,13 @@ def main2():
         train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True)
         val_loader = DataLoader(val_dataset, batch_size=config.batch_size, shuffle=False)
         
-        # 训练和评估
+        
         train_loss = train_sft(model, optimizer, scheduler, train_loader, device, epoch, total_epochs)
         val_loss = evaluate_sft(model, val_loader, device)
         
         print(f'Epoch: {epoch+1}/{total_epochs} | Train Loss: {train_loss:.4f} | Val Loss: {val_loss:.4f}')
         
-        # 保存检查点
+        # 保存
         checkpoint = {
             'epoch': epoch,
             'model_state_dict': model.state_dict(),
@@ -195,7 +195,7 @@ def main2():
             'val_loss': val_loss,
         }
         
-        # 定期保存和最佳模型保存
+        # 最佳模型保存
         if (epoch + 1) % save_interval == 0:
             torch.save(checkpoint, f'weight\weight_sft\sft_model_epoch_{epoch}.pt')
             torch.save(checkpoint, checkpoint_path)
